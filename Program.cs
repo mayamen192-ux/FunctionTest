@@ -176,14 +176,41 @@ namespace FunctionTest
             else
                 return "Strong";
         }
-    
 
 
 
+        public static string CalculateStats(int[] numbers)
+        {
+            //check if the array is null or empty
+            if (numbers == null || numbers.Length == 0)
+            {
+                return "No data provided.";
+            }
 
-        
+            int min = numbers.Min();
+            int max = numbers.Max();
+            int sum = numbers.Sum();
+            double average = Math.Round(numbers.Average(), 2);
 
-        static void Main(string[] args)
+
+            //Whether the array is sorted in ascending order (Yes / No)
+            bool isAscending = true;
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] < numbers[i - 1])
+                {
+                    isAscending = false;
+                    break;
+                }
+            }
+            //Whether the array is sorted in ascending order (Yes / No)
+            string text = isAscending ? "Yes" : "No";
+
+            string summary = "Minemum is " + min + " , Maximum is:" + max + ", sum is: " + sum + ", average is: " + average + ", Sorted Ascending:" + text;
+            return summary;
+        }
+
+static void Main(string[] args)
             {
                 // Show menu first
                 displayMenue();
@@ -244,7 +271,14 @@ namespace FunctionTest
                         string passwordInput = Console.ReadLine();
                         Console.WriteLine("Password: " + passwordInput + "  Strength: " + GetPasswordStrength(passwordInput));
                         break;
-                    case 9:
+                    case 9://Calculate Stats
+                        int[] array1 = { 3, 20, 15, 40, 12 };
+                        int[] array2 = { 2, 6, 12, 32, 64 };
+                        int[] array3 = { };
+
+                        Console.WriteLine("summary of arrary 1:" + CalculateStats(array1));
+                        Console.WriteLine("summary of arrary 2:" + CalculateStats(array2));
+                        Console.WriteLine("summary of arrary 3:" + CalculateStats(array3));
                         break;
                     case 10://Session Timer
                        
