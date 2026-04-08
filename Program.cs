@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FunctionTest
@@ -44,9 +45,9 @@ namespace FunctionTest
         // Personalised Invoice Header Function
         public static void PrintInvoiceHeader(string customerName, string invoiceDate)
         {
-          
 
-           
+
+
 
             Console.WriteLine("========================================");
             Console.WriteLine("INVOICE");
@@ -63,7 +64,7 @@ namespace FunctionTest
             // Print a top row of 40 stars
             for (int i = 0; i < 40; i++)
             {
-                Console.Write("*"); 
+                Console.Write("*");
             }
             Console.WriteLine();
 
@@ -89,7 +90,7 @@ namespace FunctionTest
             //pick a random quote from an array
             int index = rand.Next(0, quotes.Length);
 
-           // print a quote surrounded by dashes
+            // print a quote surrounded by dashes
             Console.WriteLine("----------------------------------------");
             Console.WriteLine("\"" + quotes[index] + "\"");
             Console.WriteLine("----------------------------------------");
@@ -150,9 +151,37 @@ namespace FunctionTest
             Console.WriteLine("Shortest word: " + shortest);
             Console.WriteLine("Reversed sentence: " + reversedSentence);
         }
+
+
+        public static string GetPasswordStrength(string password)
+        {
+            int score = 0;
+            //Length is 8 or more characters
+            if (password.Length >= 8)
+                score++;
+            // Contains at least one uppercase letter
+            if (Regex.IsMatch(password, "[A-Z]"))
+                score++;
+            //Contains at least one digit
+            if (Regex.IsMatch(password, "[0-9]"))
+                score++;
+            //Contains at least one special character from: ! @ # $ % ^ & *
+            if (Regex.IsMatch(password, "[!@#$%^&*]"))
+                score++;
+            //Rating: 0–1 points → Weak | 2–3 points → Moderate | 4 points → Strong
+            if (score <= 1)
+                return "Weak";
+            else if (score <= 3)
+                return "Moderate";
+            else
+                return "Strong";
+        }
     
 
 
+
+
+        
 
         static void Main(string[] args)
             {
@@ -200,7 +229,20 @@ namespace FunctionTest
                         case 7: // Temperature Converter
                         
                         break;
-                    case 8:
+                    case 8://GetPasswordStrength
+                        string[] testPasswords = {
+                         "abc123",       // Weak
+                         "Password1",    // Moderate
+                          "Pass1!",       // Moderate
+                           "Str0ng@Pwd!"   // Strong
+                                          };
+                        foreach (string pwd in testPasswords)
+                        {
+                            string strength = GetPasswordStrength(pwd);
+                        }
+                        Console.WriteLine("Enter a password to test:");
+                        string passwordInput = Console.ReadLine();
+                        Console.WriteLine("Password: " + passwordInput + "  Strength: " + GetPasswordStrength(passwordInput));
                         break;
                     case 9:
                         break;
