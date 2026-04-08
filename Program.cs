@@ -57,9 +57,44 @@ namespace FunctionTest
             Console.WriteLine("========================================");
         }
 
-    
-       
-     
+
+        public static void PrintStarBorder()
+        {
+            // Print a top row of 40 stars
+            for (int i = 0; i < 40; i++)
+            {
+                Console.Write("*"); 
+            }
+            Console.WriteLine();
+
+            // Print the text " Welcome to C# Functions!" on the next line
+            Console.WriteLine(" Welcome to C# Functions!");
+
+            //  Print a bottom row of 40 stars
+            for (int i = 0; i < 40; i++)
+            {
+                Console.Write("*"); // FIX: use Write instead of WriteLine
+            }
+            Console.WriteLine();
+        }
+
+        public static void PrintRandomQuote()
+        {
+            string[] quotes = new string[]
+            {
+        "Code is like humor. When you have to explain it, it's bad."
+            };
+
+            Random rand = new Random();
+            //pick a random quote from an array
+            int index = rand.Next(0, quotes.Length);
+
+           // print a quote surrounded by dashes
+            Console.WriteLine("----------------------------------------");
+            Console.WriteLine("\"" + quotes[index] + "\"");
+            Console.WriteLine("----------------------------------------");
+        }
+
 
         static void Main(string[] args)
             {
@@ -74,9 +109,11 @@ namespace FunctionTest
                         case 1: // Today's Greeting
                             PrintDailyGreeting();
                             break;
-                    case 2://
+                    case 2:// Print Star Border
+                            PrintStarBorder();
                         break;
-                    case 3:
+                    case 3://Print Random Quote
+                        PrintRandomQuote();
                         break;
                         case 4: // Personalised Invoice Header
                                 // Example calls
