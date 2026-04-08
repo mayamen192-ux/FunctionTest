@@ -94,6 +94,64 @@ namespace FunctionTest
             Console.WriteLine("\"" + quotes[index] + "\"");
             Console.WriteLine("----------------------------------------");
         }
+        public static void PrintNumberPattern(int rows)
+        {
+            // right-aligned triangle of numbers
+            for (int i = 1; i <= rows; i++)
+            {
+                for (int j = 1; j <= i; j++)
+                {
+                    Console.Write(j);
+                }
+                Console.WriteLine();
+            }
+            // If rows is less than 1, print "Invalid input. Rows must be at least 1."
+            if (rows < 1)
+            {
+                Console.WriteLine("Invalid input. Rows must be at least 1.");
+                return;
+            }
+        }
+
+        public static void PrintWordStats(string sentence)
+        {
+            //checking for empty or whitespace input
+            if (string.IsNullOrWhiteSpace(sentence))
+            {
+                Console.WriteLine("Sentence is empty. Please provide valid input.");
+                return;
+            }
+            //Split sentence into words
+            string[] words = sentence.Split(' ');
+            //total number of words in the sentence
+            int wordCount = words.Length;
+
+            string longest = words[0];
+            string shortest = words[0];
+
+            // loop for checking each word in the sentence to know the sortest and longest word 
+            foreach (string word in words)
+            {
+                if (word.Length > longest.Length)
+                {
+                    longest = word;
+                }
+
+                if (word.Length < shortest.Length)
+                {
+                    shortest = word;
+                }
+            }
+            // all words reversed in order
+            Array.Reverse(words);
+            string reversedSentence = string.Join(" ", words);
+            Console.WriteLine("Total words: " + wordCount);
+            Console.WriteLine("Longest word: " + longest);
+            Console.WriteLine("Shortest word: " + shortest);
+            Console.WriteLine("Reversed sentence: " + reversedSentence);
+        }
+    
+
 
 
         static void Main(string[] args)
@@ -127,9 +185,16 @@ namespace FunctionTest
                       
 
                         break;
-                    case 5:
+                    case 5://PrintNumberPattern
+                        Console.WriteLine("Enter a number of rows:");
+                        int numberOfRows=int.Parse(Console.ReadLine());
+                        PrintNumberPattern(numberOfRows);
                         break;
-                    case 6:
+                    case 6://Print Word Stats
+                        Console.WriteLine("Enter  a sentence:");
+                        string sentenceInput= Console.ReadLine();
+                        PrintWordStats(sentenceInput);
+
                         break;
 
                         case 7: // Temperature Converter
